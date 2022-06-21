@@ -1,0 +1,31 @@
+POST http://localhost:8080/register
+Content-Type: application/x-www-form-urlencoded
+
+name=MonApp3&url=http://localhost:8080&redirect_uri=http://localhost:8080/callback
+
+#######################################
+##        Authorization_code         ##
+#######################################
+### Lien vers modal d'approbation
+GET http://localhost:8080/auth?response_type=code&client_id=621e3b8d1f964&redirect_uri=http://localhost:8081/callback&scope=read&state=xyz
+
+### Retour de modal => resultat redirige vers redirect_uri
+GET http://localhost:8080/auth-success?client_id=621e3b8d1f964&state=xyz
+
+### Exchange code with token
+GET http://localhost:8080/token?client_id=621e3b8d1f964&client_secret=621e3b8d1f966&code=7bc1830b566d7da73347e84eb8c28cfa&grant_type=authorization_code&redirect_uri=http://localhost:8081/callback
+
+### Exchange user with token
+GET http://localhost:8080/token?client_id=621e3b8d1f964&client_secret=621e3b8d1f966&username=john&password=doe&grant_type=password&redirect_uri=http://localhost:8081/callback
+
+### Exchange user with token
+GET http://localhost:8080/token?client_id=621e3b8d1f964&client_secret=621e3b8d1f966&grant_type=client_credentials&redirect_uri=http://localhost:8081/callback
+
+### Exchange poulet with token
+GET http://localhost:8080/token?client_id=621e3b8d1f964&client_secret=621e3b8d1f966&username=john&password=doe&grant_type=poulet&redirect_uri=http://localhost:8081/callback
+
+#######################################
+##         Get User Profile          ##
+#######################################
+GET http://localhost:8080/me
+Authorization: Bearer d08acbb8b7ef8126e525f4bed4f35d39

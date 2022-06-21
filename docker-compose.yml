@@ -1,0 +1,18 @@
+version: '3'
+services:
+  oauth-server:
+    image: php:alpine
+    volumes:
+      - ./server:/home/root
+    working_dir: /home/root
+    ports:
+      - 8080:8080
+    command: "php -S 0.0.0.0:8080"
+  oauth-client:
+    image: php:alpine
+    volumes:
+      - ./client:/home/root
+    working_dir: /home/root
+    ports:
+      - 8081:8080
+    command: "php -S 0.0.0.0:8080"
