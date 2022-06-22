@@ -29,3 +29,11 @@ GET http://localhost:8080/token?client_id=621e3b8d1f964&client_secret=621e3b8d1f
 #######################################
 GET http://localhost:8080/me
 Authorization: Bearer d08acbb8b7ef8126e525f4bed4f35d39
+
+### 
+POST https://discord.com/api/v10/oauth2/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Content-Lenght: 209
+
+code=2DT4FL6NZI9FrCfHbG7TTXkIxs8n1X&client_id=988725359518294016&client_secret=woE63_1JETD4Y3XXyKK6c5SXvJTJYEIx&grant_type=authorization_code&redirect_url=http://localhost:8081/ds_callback&scope=identify guids
