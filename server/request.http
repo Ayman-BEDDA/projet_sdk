@@ -36,4 +36,8 @@ Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 Content-Lenght: 209
 
-code=2DT4FL6NZI9FrCfHbG7TTXkIxs8n1X&client_id=988725359518294016&client_secret=woE63_1JETD4Y3XXyKK6c5SXvJTJYEIx&grant_type=authorization_code&redirect_url=http://localhost:8081/ds_callback&scope=identify guids
+code=EWcyxLIxIUPeY5nWZfvoBogNjvISgU&client_id=988725359518294016&client_secret=woE63_1JETD4Y3XXyKK6c5SXvJTJYEIx&grant_type=authorization_code&redirect_url=http://localhost:8081/ds_callback&scope=identify guids
+
+###
+GET https://discord.com/api/v10/users/@me
+Authorization: Bearer te3W1MNtdbGz81OKKQTKLUq9qW9bDf
