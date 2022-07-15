@@ -13,8 +13,7 @@ function myAutoloader($class)
     if(file_exists($class)){
         include $class;//On utilise include car plus rapide, et on a déjà vérifier son existance
     }else{
-        ini_get('display_errors') == 0 ? die('404 not found : la classe n\'existe pas') : header('Location:/page-non-trouvee');
-
+        die('Le fichier n\'existe pas');
     }
 } 
 
