@@ -10,6 +10,15 @@
                 "state" => bin2hex(random_bytes(16))
             ]          
         ],
+        "Twitch" => [
+            "https://id.twitch.tv/oauth2/authorize?" =>  [
+                "client_id" => "znao7yk4cztuyojgyxe85ef5uh5bu3",
+                "redirect_uri" => "http://localhost:8081/tw_callback",
+                "response_type" => "code",
+                "scope" => "user:read:broadcast",
+                "state" => bin2hex(random_bytes(16))
+            ]          
+        ],
         "Facebook" => [
             "https://www.facebook.com/v2.10/dialog/oauth?" =>  [
                 "client_id" => "703009470765061",

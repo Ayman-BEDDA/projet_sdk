@@ -1,4 +1,5 @@
-<?php 
+<?php
+
     define('API_LINK', 'https://api.twitch.tv/helix');
     
     class OAuthTwitch{
@@ -14,11 +15,6 @@
             $this->_client_secret = $client_secret;
             $this->_redirect_uri = $redirect_uri;
             $this->_scope = $scope;
-        }
-
-        public function get_link_connect(){
-            $link = "https://id.twitch.tv/oauth2/authorize?client_id=".$this->_client_id."&redirect_uri=".$this->_redirect_uri."&response_type=code&scope=".$this->_scope."&force_verify=true";
-            return $link;
         }
 
         public function get_token($code){
@@ -69,7 +65,4 @@
             $user = json_decode($res);
             return $user;
         }
-
-        
-
     }
