@@ -1,4 +1,23 @@
 <?php
+session_start();
+require_once 'src/config.php';
+require_once 'src/oauthtwitch.php';
+
+$link = $oauth->get_link_connect();
+
+if(!empty($_GET['code'])){
+    $code = htmlspecialchars($_GET['code']);
+    
+    $token = $oauth->get_token($code);
+
+    $_SESSION['token'] = $token;
+    header('Location: callback.php');
+    die();
+
+}
+
+
+
 
 function login()
 {
@@ -25,6 +44,13 @@ function login()
         "state" => bin2hex(random_bytes(16))
     ));
     echo "<a href=\"https://www.facebook.com/v2.10/dialog/oauth?{$queryParams}\">Se connecter via Facebook</a>";
+
+
+    global $link;
+
+    echo "<br/><a href=".$link.">Se connecter via Twitch</a>";
+
+
 }
 
 function callback()
@@ -73,8 +99,8 @@ function fbcallback()
             "grant_type" => "authorization_code",
             "code" => $_GET["code"],
         ];
-    $clientId = "1010755216459252";
-    $clientSecret = "b0c27b63308d46ae5d236d2bd691921b";
+    $clientId = "703009470765061";
+    $clientSecret = "4caf6586eab19e1f015f6165a79fbb57";
     $redirectUri = "http://localhost:8081/fb_callback";
     $data = http_build_query(array_merge([
         "redirect_uri" => $redirectUri,
@@ -99,6 +125,12 @@ function fbcallback()
     echo "Hello {$result['name']}";
 }
 
+function twcallback()
+{
+    //global $oauth;
+    
+}
+
 $route = $_SERVER['REQUEST_URI'];
 switch (strtok($route, "?")) {
     case '/login':
@@ -109,6 +141,9 @@ switch (strtok($route, "?")) {
         break;
     case '/fb_callback':
         fbcallback();
+        break;
+    case '/tw_callback':
+        twcallback();
         break;
     default:
         echo '404';
