@@ -48,37 +48,28 @@
             ];
         }
 
-        // Methode pour rechercher une chaine 
-        public function search_channel($name){
-
-
-            $link = API_LINK."/search/channels?query=".$name;
-            // cURL 
-            $ch = curl_init($link);
-
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_headers);
-
-            $res = curl_exec($ch);
-            curl_close($ch);
-
-            // on decode et on renvoie
-            return json_decode($res);
-        }
-
         public function get_channel_info($id){
-            $link = API_LINK."/channels?broadcaster_id=".$id;
-            
-            $ch = curl_init($link);
-
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $url = API_LINK.'/users?id='.$id;
+            $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_headers);
-
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $res = curl_exec($ch);
             curl_close($ch);
+            $channel = json_decode($res);
+            return $channel;
+        } 
 
-            return json_decode($res);
+        public function get_id($pseudo){
+            $url = API_LINK.'/users?login='.$pseudo;
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $res = curl_exec($ch);
+            curl_close($ch);
+            $user = json_decode($res);
+            return $user;
         }
 
+        
 
     }

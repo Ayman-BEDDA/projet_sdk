@@ -5,29 +5,12 @@ require_once 'src/oauthtwitch.php';
 
 $link = $oauth->get_link_connect();
 
-if(!empty($_GET['code'])){
-    $code = htmlspecialchars($_GET['code']);
-    
-    $token = $oauth->get_token($code);
-
-    $_SESSION['token'] = $token;
-    header('Location: callback.php');
-    die();
-
-}
-
 
 
 
 function login()
 {
-    $queryParams= http_build_query(array(
-        "client_id" => "621e3b8d1f964",
-        "redirect_uri" => "http://localhost:8081/callback",
-        "response_type" => "code",
-        "scope" => "read,write",
-        "state" => bin2hex(random_bytes(16))
-    ));
+    
     echo "
         <form action='callback' method='POST'>
             <input type='text' name='username'>
@@ -35,15 +18,18 @@ function login()
             <input type='submit' value='Login'>
         </form>
     ";
-    echo "<a href=\"http://localhost:8080/auth?{$queryParams}\">Se connecter via Oauth Server</a><br/>";
-    $queryParams= http_build_query(array(
-        "client_id" => "1010755216459252",
+    //echo "<a href=\"http://localhost:8080/auth?{$queryParams}\">Se connecter via Oauth Server</a><br/>";
+
+
+
+    $url= http_build_query(array(
+        "client_id" => "703009470765061",
         "redirect_uri" => "http://localhost:8081/fb_callback",
         "response_type" => "code",
         "scope" => "public_profile,email",
         "state" => bin2hex(random_bytes(16))
     ));
-    echo "<a href=\"https://www.facebook.com/v2.10/dialog/oauth?{$queryParams}\">Se connecter via Facebook</a>";
+    echo "<a href=\"https://www.facebook.com/v2.10/dialog/oauth?" . $url . "\">Se connecter via Facebook</a>";
 
 
     global $link;
@@ -127,7 +113,20 @@ function fbcallback()
 
 function twcallback()
 {
-    //global $oauth;
+    if(!empty($_GET['code'])){
+
+        global $oauth;
+        $code = htmlspecialchars($_GET['code']);
+        
+
+        $token = $oauth->get_token($code);
+    
+        $_SESSION['token'] = $token;
+        header('Location: callback.php');
+        die();
+    
+    }
+    
     
 }
 
