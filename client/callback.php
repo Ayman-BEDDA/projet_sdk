@@ -7,7 +7,7 @@ $oauth->set_headers($_SESSION['token']);
 
 $query = $oauth->get_channel_info('803248979');
 //$query = $oauth->get_id('hahaha931');
-var_dump($query);
-echo "test";
+$login = $query -> data[0] -> login;
+echo "hello " . $login;
 
 
